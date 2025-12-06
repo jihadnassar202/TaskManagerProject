@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 col-lg-10 mx-auto">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="h3 mb-0">Tasks</h1>
+      <a href="{% url 'task_create' %}" class="btn btn-primary">+ New Task</a>
+    </div>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success py-2">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="card card-custom">
+      <div class="card-body p-0">
+        {% if tasks %}
+          <div class="table-responsive">
+         <table class="table table-hover mb-0 align-middle table-tasks">
+
+              <thead>
+              <tr class="table-header-navy">
+    <th>Title</th>
+    <th>Status</th>
+    <th>Assigned To</th>
+    <th>Due Date</th>
+    <th>Created By</th>
+    <th></th>
+</tr>
+
+              </thead>
+              <tbody>
+                {% for task in tasks %}
+                  <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.get_status_display }}</td>
+                    <td>{{ task.assigned_to.username }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.created_by.username }}</td>
+                    <td class="text-end">
+                      <a href="{% url 'task_update' task.pk %}"
+                         class="btn btn-sm btn-outline-light me-2">Edit</a>
+                      <a href="{% url 'task_delete' task.pk %}"
+                         class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <p class="p-3 mb-0">No tasks yet. <a href="{% url 'task_create' %}">Create one</a>.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

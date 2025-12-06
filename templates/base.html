@@ -12,32 +12,94 @@
     >
 
     <style>
-      body {
-        background: #0b1726; /* أزرق بحري غامق */
-        color: #f5f7fa;
-      }
-      .navbar-custom {
-        background: #102a43; /* أزرق بحري أفتح */
-      }
-      .card-custom {
-        background: #1b2a3b;
-        border: 1px solid #23395b;
-        border-radius: 16px;
-      }
-      a, .page-link {
-        color: #4dabf7;
-      }
-      a:hover {
-        color: #74c0fc;
-      }
-      .btn-primary {
-        background: #1c7ed6;
-        border-color: #1c7ed6;
-      }
-      .btn-primary:hover {
-        background: #1864ab;
-        border-color: #1864ab;
-      }
+    
+  /* GLOBAL */
+  body {
+    background: #F4F8FB; 
+    color: #1a1a1a;
+    font-family: system-ui, sans-serif;
+  }
+
+  /* NAVBAR */
+  .navbar-custom {
+    background: #0A3D62; 
+  }
+  .navbar-custom .nav-link,
+  .navbar-custom .navbar-brand {
+    color: #ffffff !important;
+  }
+  .navbar-custom .nav-link:hover {
+    color: #60A3D9 !important;
+  }
+
+  /* CARDS */
+  .card-custom {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #DDE6EE;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    background: #0A3D62;
+    border-color: #0A3D62;
+  }
+  .btn-primary:hover {
+    background: #062B45;
+    border-color: #062B45;
+  }
+  .btn-outline-light {
+    color: #0A3D62;
+    border-color: #0A3D62;
+  }
+  .btn-outline-light:hover {
+    background: #0A3D62;
+    color: #ffffff;
+  }
+
+  /* TABLE HEADER (NAVY BLUE) */
+  .table-tasks thead {
+    background: #0A3D62;   
+    color: #ffffff;     
+  }
+
+  /* TABLE ROWS (WHITE) */
+  .table-tasks tbody tr {
+    background: #ffffff;
+    color: #1a1a1a;
+  }
+
+  /* TABLE ROW HOVER */
+  .table-tasks tbody tr:hover {
+    background: #F0F6FA;  
+  }
+
+  /* TABLE BORDERS */
+  .table-tasks td, 
+  .table-tasks th {
+    border-color: #DDE6EE;
+    vertical-align: middle;
+  }
+
+  /* FORM INPUTS */
+  .form-control, .form-select, textarea {
+    background: #ffffff;
+    border: 1px solid #DDE6EE;
+    color: #1a1a1a;
+  }
+  .form-control:focus, .form-select:focus, textarea:focus {
+    border-color: #60A3D9;
+    box-shadow: 0 0 0 0.2rem rgba(96, 163, 217, 0.25);
+  }
+.table-tasks thead th {
+  background-color: #0A3D62 !important;
+  color: #ffffff !important;
+}
+
+
+</style>
+
     </style>
 
     {% block extra_head %}{% endblock %}
