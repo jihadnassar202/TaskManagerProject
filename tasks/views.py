@@ -5,7 +5,6 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from .models import Task
 from .forms import TaskForm
 
@@ -16,7 +15,8 @@ def task_list(request):
     Display a paginated list of tasks created by the logged-in user,
     with optional search and status filtering.
     """
-    queryset = Task.objects.filter(created_by=request.user).order_by('-created_at')
+    # show tasks from oldest to newest
+    queryset = Task.objects.filter(created_by=request.user).order_by('created_at')
 
     #search
     q = request.GET.get('q', '').strip()
@@ -52,6 +52,13 @@ def task_create(request):
         if form.is_valid():
             task = form.save(commit=False)
             task.created_by = request.user
+            # Ensure assigned_to is set to avoid DB null constraint if column is non-nullable
+            try:
+                # set assigned_to to the creator by default
+                task.assigned_to = request.user
+            except Exception:
+                # if the model doesn't have assigned_to, ignore
+                pass
             task.save()
             messages.success(request, 'Task created successfully.')
             return redirect('task_list')

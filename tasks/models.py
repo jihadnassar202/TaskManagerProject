@@ -28,11 +28,8 @@ class Task(models.Model):
         related_name='tasks_created',
         on_delete=models.CASCADE
     )
-    assigned_to = models.ForeignKey(
-        User,
-        related_name='tasks_assigned',
-        on_delete=models.CASCADE
-    )
+
+    
     created_at = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField()
 

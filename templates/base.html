@@ -13,7 +13,6 @@
 
     <style>
 
-  /* GLOBAL */
   body {
     background: #F4F8FB; 
     color: #1a1a1a;
@@ -59,12 +58,20 @@
   }
 
   /* TABLE HEADER (NAVY BLUE) */
-  .table-tasks thead {
-    background: #0A3D62;   
-    color: #ffffff;     
+  .table-tasks thead,
+  .table-tasks thead th,
+  .table-tasks thead tr {
+    background-color: #0A3D62 !important;
+    color: #ffffff !important;
   }
 
-  /* NAV-BOXES: colorful boxed nav items with hover effect */
+  /* ensure <th> elements inherit white text and no additional background from Bootstrap */
+  .table-tasks thead th {
+    background-color: #0A3D62 !important;
+    color: #ffffff !important;
+    border-color: #0A3D62 !important;
+  }
+
   .nav-box {
     display: inline-block;
     padding: 6px 12px;
@@ -86,7 +93,6 @@
     opacity: 0.98;
   }
 
-  /* Color varieties */
   .box-blue { background: linear-gradient(135deg,#3b82f6,#60a5fa); }
   .box-green { background: linear-gradient(135deg,#10b981,#34d399); }
   .box-purple { background: linear-gradient(135deg,#8b5cf6,#a78bfa); }
@@ -94,39 +100,6 @@
   .box-red { background: linear-gradient(135deg,#ef4444,#f97316); }
 
   </style>
-
-  /* TABLE ROW HOVER */
-  .table-tasks tbody tr:hover {
-    background: #F0F6FA;  
-  }
-
-  /* TABLE BORDERS */
-  .table-tasks td, 
-  .table-tasks th {
-    border-color: #DDE6EE;
-    vertical-align: middle;
-  }
-
-  /* FORM INPUTS */
-  .form-control, .form-select, textarea {
-    background: #ffffff;
-    border: 1px solid #DDE6EE;
-    color: #1a1a1a;
-  }
-  .form-control:focus, .form-select:focus, textarea:focus {
-    border-color: #60A3D9;
-    box-shadow: 0 0 0 0.2rem rgba(96, 163, 217, 0.25);
-  }
-.table-tasks thead th {
-  background-color: #0A3D62 !important;
-  color: #ffffff !important;
-}
-
-
-</style>
-
-    </style>
-
     {% block extra_head %}{% endblock %}
   </head>
   <body>
