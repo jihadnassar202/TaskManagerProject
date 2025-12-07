@@ -1,6 +1,6 @@
 # Task Manager Project
 
-A Django-based task management system built as an internship assignment.
+A Django-based task management system 
 
 ## Tech Stack
 
