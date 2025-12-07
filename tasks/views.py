@@ -1,4 +1,7 @@
 from django.db.models import Q
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+import json
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -84,4 +87,27 @@ def task_delete(request, pk):
         return redirect('task_list')
     return render(request, 'tasks/task_confirm_delete.html', {
         'task': task
+    })
+@login_required
+@require_POST
+def task_toggle_status(request, pk):
+    try:
+        task = Task.objects.get(pk=pk, created_by=request.user)
+    except Task.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Not found'}, status=404)
+
+    if request.headers.get('x-requested-with') != 'XMLHttpRequest':
+        return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
+# this is a simple toggle
+    if task.status == Task.STATUS_COMPLETED:
+        task.status = Task.STATUS_PENDING
+    else:
+        task.status = Task.STATUS_COMPLETED
+
+    task.save()
+
+    return JsonResponse({
+        'success': True,
+        'status': task.status,
+        'status_display': task.get_status_display(),
     })
