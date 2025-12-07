@@ -12,7 +12,7 @@
     >
 
     <style>
-    
+
   /* GLOBAL */
   body {
     background: #F4F8FB; 
@@ -64,11 +64,36 @@
     color: #ffffff;     
   }
 
-  /* TABLE ROWS (WHITE) */
-  .table-tasks tbody tr {
-    background: #ffffff;
-    color: #1a1a1a;
+  /* NAV-BOXES: colorful boxed nav items with hover effect */
+  .nav-box {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 10px;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    margin-right: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
   }
+  .nav-box:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(96,163,217,0.16);
+  }
+  .nav-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(11,33,70,0.12);
+    opacity: 0.98;
+  }
+
+  /* Color varieties */
+  .box-blue { background: linear-gradient(135deg,#3b82f6,#60a5fa); }
+  .box-green { background: linear-gradient(135deg,#10b981,#34d399); }
+  .box-purple { background: linear-gradient(135deg,#8b5cf6,#a78bfa); }
+  .box-orange { background: linear-gradient(135deg,#fb923c,#fb7185); }
+  .box-red { background: linear-gradient(135deg,#ef4444,#f97316); }
+
+  </style>
 
   /* TABLE ROW HOVER */
   .table-tasks tbody tr:hover {
@@ -115,10 +140,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'task_list' %}">Tasks</a>
+              <a class="nav-link nav-box box-blue" href="{% url 'task_list' %}">Tasks</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'task_create' %}">New Task</a>
+              <a class="nav-link nav-box box-green" href="{% url 'task_create' %}">New Task</a>
             </li>
           </ul>
           <ul class="navbar-nav">
@@ -126,9 +151,13 @@
               <li class="nav-item">
                 <span class="nav-link disabled">Hi, {{ user.username }}</span>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              </li>
+            <li class="nav-item">
+  <form method="post" action="{% url 'logout' %}" class="d-inline">
+    {% csrf_token %}
+    <button type="submit" class="nav-box box-orange border-0">Logout</button>
+  </form>
+</li>
+
             {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}">Login</a>

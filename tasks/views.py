@@ -1,7 +1,6 @@
 from django.db.models import Q
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-import json
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -13,7 +12,10 @@ from .forms import TaskForm
 
 @login_required
 def task_list(request):
-   
+    """
+    Display a paginated list of tasks created by the logged-in user,
+    with optional search and status filtering.
+    """
     queryset = Task.objects.filter(created_by=request.user).order_by('-created_at')
 
     #search
@@ -91,6 +93,10 @@ def task_delete(request, pk):
 @login_required
 @require_POST
 def task_toggle_status(request, pk):
+    """
+    Toggle a task's status between pending and completed via Ajax.
+    Only the creator of the task can perform this action.
+    """
     try:
         task = Task.objects.get(pk=pk, created_by=request.user)
     except Task.DoesNotExist:

@@ -3,6 +3,9 @@ from .models import Task
 
 
 class TaskForm(forms.ModelForm):
+    """
+    Form used to create and update Task instances in the UI.
+    """
     class Meta:
         model = Task
         fields = ['title', 'description', 'status', 'assigned_to', 'due_date']

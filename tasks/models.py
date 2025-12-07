@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
+    """
+    Represents a task in the system with status, owner, assignee and due date.
+    """
     STATUS_PENDING = 'pending'
     STATUS_IN_PROGRESS = 'in_progress'
     STATUS_COMPLETED = 'completed'
