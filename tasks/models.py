@@ -3,9 +3,6 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    """
-    Represents a task in the system with status, owner, assignee and due date.
-    """
     STATUS_PENDING = 'pending'
     STATUS_IN_PROGRESS = 'in_progress'
     STATUS_COMPLETED = 'completed'
@@ -28,13 +25,15 @@ class Task(models.Model):
         related_name='tasks_created',
         on_delete=models.CASCADE
     )
-
-    
+    assigned_to = models.ForeignKey(
+        User,
+        related_name='tasks_assigned',
+        on_delete=models.CASCADE,
+        null=True, 
+        blank=True,
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField()
 
     def __str__(self):
         return f"{self.title} ({self.get_status_display()})"
-
-
-# Create your models here.
