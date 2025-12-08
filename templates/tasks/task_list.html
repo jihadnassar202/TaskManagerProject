@@ -51,6 +51,7 @@
                   <th style="width:6%">ID</th>
                   <th>Title</th>
                   <th>Status</th>
+                  <th>Assigned To</th>
                   <th>Due Date</th>
                   <th>Created At</th>
                   <th></th>
@@ -63,6 +64,7 @@
                     <td>{{ forloop.counter0|add:page_obj.start_index }}</td>
                     <td>{{ task.title }}</td>
                     <td class="task-status">{{ task.get_status_display }}</td>
+                    <td>{{ task.assigned_to.username }}</td>
                     <td>{{ task.due_date }}</td>
                     <td>{{ task.created_at|date:"Y-m-d H:i" }}</td>
                     <td class="text-end">
