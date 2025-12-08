@@ -22,6 +22,17 @@ A Django-based task management system
 - Ajax toggle for task status (pending <-> completed)
 - Permission: users can only see and manage their own tasks
 
+## Environment variables (.env)
+
+Create a `.env` file in the project root (next to `manage.py`) with at least:
+
+SECRET_KEY=your_django_secret_key
+DB_NAME=task_manager_db
+DB_USER=task_user
+DB_PASSWORD=your_db_password
+DB_HOST=localhost
+DB_PORT=5432
+
 ## How to run locally
 
 1. Create and activate a virtual environment
